@@ -1,4 +1,4 @@
-package action;
+package controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/user")
-public class UserAction {
+public class UserController {
     @Resource
     private UserService userService;
 

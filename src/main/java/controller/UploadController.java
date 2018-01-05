@@ -1,4 +1,4 @@
-package action;
+package controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import utils.ResponseUtils;
 
 @Controller
 @RequestMapping("/upload")
-public class UploadAction {
+public class UploadController {
 	@Resource
     private UploadService uploadService;
     @Autowired
