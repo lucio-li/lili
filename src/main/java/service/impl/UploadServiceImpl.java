@@ -1,16 +1,13 @@
 package service.impl;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import dao.MomentsMapper;
+import model.Moments;
+import org.springframework.stereotype.Service;
+import service.UploadService;
 
 import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
-import dao.MomentsMapper;
-import dao.UserMapper;
-import model.Moments;
-import service.UploadService;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 @Service(value="UploadService")
 public class UploadServiceImpl implements UploadService{
 	@Resource
@@ -23,7 +20,7 @@ public class UploadServiceImpl implements UploadService{
 	 */
 	public String addContent(Moments moments) throws UnsupportedEncodingException {
 		// TODO Auto-generated method stub
-		String time = moments.getTime();
+		//String time = moments.getTime();
 		File file = new File(this.getClass().getResource("/").getPath());
 		String destDirectory = file.getParentFile().getParentFile().getParent() + "/images/" + moments.numberDataTime();
 		File directory = new File(destDirectory);

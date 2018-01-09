@@ -1,27 +1,21 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.Moments;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import service.UploadService;
+import utils.ResponseUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import model.Moments;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import service.UploadService;
-import service.UserService;
-import utils.ResponseUtils;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("/upload")
@@ -34,7 +28,14 @@ public class UploadController {
     @RequestMapping("/content")
     public String  content(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
     	//上传照片前的上传数据
+
+
         String time = request.getParameter("time");
+
+        if (time.length() < 5) {
+            ResponseUtils.renderJson(response, "{\"result\":\"fail\"}");
+            return null;
+        }
         String location = request.getParameter("location");
         String content  = request.getParameter("content");
         String avatarUrl = request.getParameter("avatarUrl");
@@ -52,6 +53,7 @@ public class UploadController {
             ResponseUtils.renderJson(response, str);
         } catch (Exception e) {
             e.printStackTrace();
+            ResponseUtils.renderJson(response, "{\"result\":\"fail\"}");
         }
         return null;
     }
@@ -75,7 +77,7 @@ public class UploadController {
                 ResponseUtils.renderJson(response, "{\"success\": \" " + filePath + "\"}");
             } catch (Exception e) {
                 e.printStackTrace();
-                ResponseUtils.renderJson(response, "{\"fail\": \" success\"}");
+                ResponseUtils.renderJson(response, "{\"fail\": \" false\"}");
             }
         }
 

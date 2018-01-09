@@ -1,12 +1,10 @@
 package service.impl;
 
-import com.alibaba.druid.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.MomentsMapper;
-import dao.UserMapper;
 import model.Moments;
-import model.User;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import service.MomentsService;
 
@@ -14,7 +12,6 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by lq on 2017/12/13.
  */
@@ -22,7 +19,7 @@ import java.util.List;
 public class MomentsServiceImpl implements MomentsService{
     @Resource
     private MomentsMapper momentsMapper;
-
+    private Logger logger = Logger.getLogger(MomentsServiceImpl.class);
     public String queryAll() throws JsonProcessingException {
         List<Moments> momentsList = momentsMapper.queryAll();
         for (int i = 0, len = momentsList.size(); i < len; i++) {
@@ -54,6 +51,18 @@ public class MomentsServiceImpl implements MomentsService{
         }
         String avatarUrlListJson = mapper.writeValueAsString(avatarUrlList);
         return "{\"momentsList\":" + momentsJson + ",\"avatarUrlList\":" + avatarUrlListJson + "}";
+
+    }
+
+    public String deleteOne(String time) {
+        logger.info("测试log");
+        int a = momentsMapper.deleteOne(time);
+        if (a == 0) {
+            return "fail";//删除失败
+        } else {
+            return "success";//删除成功
+        }
+
 
     }
 }

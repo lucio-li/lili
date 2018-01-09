@@ -1,12 +1,12 @@
 package dao;
 
-import java.util.List;
-
 import model.Moments;
-import model.User;
+
+import java.util.List;
 
 public interface MomentsMapper {
 	List<Moments> queryAll();
     void insertOne(Moments moments);
     List<String> queryAvatarUrlList();
+    int deleteOne(String time);
 }

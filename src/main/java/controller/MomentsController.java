@@ -1,20 +1,13 @@
 package controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Moments;
-import model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import service.MomentsService;
-import service.UploadService;
 import utils.ResponseUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 朋友圈照片的展示，管理
@@ -26,7 +19,13 @@ public class MomentsController {
     @Resource
     private MomentsService momentsService;
 
-
+    /**
+     *
+     * @param request
+     * @param response
+     * 获取所有的动态
+     * @return
+     */
     @RequestMapping("list")
     public String  list(HttpServletRequest request, HttpServletResponse response) {
         String  result = null;
@@ -45,6 +44,20 @@ public class MomentsController {
 
 
         ResponseUtils.renderJson(response, result);
+        return null;
+    }
+
+    /**
+     * 删除一条动态
+     */
+    @RequestMapping("deleteOne")
+    public String deleteOne(HttpServletResponse response, String time) {
+        if (time == null || "".equals(time.trim())) {
+            ResponseUtils.renderJson(response, "{\"result\": \"fail\"}");
+            return null;
+        }
+        String result = momentsService.deleteOne(time);
+        ResponseUtils.renderJson(response, "{\"result\": \"" + result + "\"}");
         return null;
     }
 }
