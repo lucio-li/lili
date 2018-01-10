@@ -7,6 +7,13 @@
         <result column="location" jdbcType="VARCHAR" property="location" />
         <result column="directory" jdbcType="VARCHAR" property="directory" />
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
+        <collection property="commentsList" ofType="model.Comments">
+
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="content_detail" jdbcType="VARCHAR" property="contentDetail"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        </collection>
+
     </resultMap>
     <!--<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mblc.seo.cms.htmlgen.model.CmsStaticData">-->
         <!--<result column="json" jdbcType="LONGVARCHAR" property="json" />-->
@@ -15,7 +22,12 @@
           <!--  select content, time, location, directory, avatarUrl from moments JOIN couple
          on moments.openid = couple.cpA or moments.openid =  couple.cpB
          where couple.cpA=#{openid} or couple.cpB = #{openid}-->
-        select content, time, location, directory, avatarUrl from moments order by TIME desc
+        select moments.content, moments.time, moments.location, moments.directory, moments.avatarUrl,
+        comments.name, comments.content_detail, comments.create_time
+        from
+        moments left join comments
+        ON moments.time = comments.moments_time
+        order by moments.time desc
     </select>
 
     <select id="queryAvatarUrlList"  resultType="java.lang.String">

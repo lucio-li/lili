@@ -2,6 +2,10 @@ package model;
 
 import java.util.List;
 
+/**
+ * lq
+ * 动态的实体类
+ */
 public class Moments {
 	private String content;
 	private String time;
@@ -9,6 +13,15 @@ public class Moments {
 	private String directory;
 	private String avatarUrl;
 	private List<String> imageUrlLlist;
+	private List<Comments> commentsList;
+
+	public List<Comments> getCommentsList() {
+		return commentsList;
+	}
+
+	public void setCommentsList(List<Comments> commentsList) {
+		this.commentsList = commentsList;
+	}
 
 	public List<String> getImageUrlLlist() {
 		return imageUrlLlist;
