@@ -1,12 +1,9 @@
 package controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import model.User;
 import service.UserService;
-import utils.HttpRequestUtils;
 import utils.ResponseUtils;
 
 import javax.annotation.Resource;
@@ -19,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     @Resource
     private UserService userService;
 
