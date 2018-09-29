@@ -262,15 +262,32 @@
           <server>tomcat6</server>
         </configuration>
       </plugin>
+      <!-- resource插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <includeEmptyDirs>true</includeEmptyDirs>
+        </configuration>
+      </plugin>
     </plugins>
-    <resources>  
-	    <resource>  
-	        <directory>src/main/java</directory>  
-	        <includes>  
-	            <include>**/*.xml</include>  
-	        </includes>  
-	        <filtering>true</filtering>  
-	    </resource>  
+    <resources>
+        <resource>
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.properties</include>
+            <include>**/*.xml</include>
+          </includes>
+          <filtering>true</filtering>
+        </resource>
+	    <resource>
+	        <directory>src/main/java</directory>
+	        <includes>
+	            <include>**/*.xml</include>
+	        </includes>
+	        <filtering>true</filtering>
+	    </resource>
 	</resources>
   </build>
 
